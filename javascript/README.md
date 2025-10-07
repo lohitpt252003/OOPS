@@ -8,15 +8,25 @@ Object-Oriented Programming (OOP) is a programming paradigm based on the concept
 
 ## Pillars of OOP
 
-Object-Oriented Programming is built on four main principles, often called the pillars of OOP:
+Object-Oriented Programming is built on four main principles, often called the pillars of OOP. In this chapter, we will focus on **Encapsulation**. The other pillars—Abstraction, Inheritance, and Polymorphism—will be covered in upcoming chapters.
 
-1.  **Encapsulation**: This is the bundling of data (attributes) and methods that operate on the data into a single unit, a class. It restricts direct access to some of an object's components. In JavaScript, encapsulation is achieved using private class fields (`#`) and closures.
+1.  **Encapsulation**: This is the bundling of data (attributes) and the methods (functions) that operate on that data into a single unit called a class. It restricts direct access to some of an object's components.
+2.  **Abstraction**: To be covered in an upcoming chapter.
+3.  **Inheritance**: To be covered in an upcoming chapter.
+4.  **Polymorphism**: To be covered in an upcoming chapter.
 
-2.  **Abstraction**: Abstraction means hiding the complex implementation details and showing only the essential features of the object. It helps in managing complexity by allowing us to focus on what an object does instead of how it does it. For example, a developer using a library doesn't need to know how a function is implemented internally to use it.
+## What is Encapsulation?
 
-3.  **Inheritance**: This is a mechanism where a new class (subclass) inherits properties and behaviors (methods) from an existing class (superclass) using the `extends` keyword. It promotes code reusability.
+Encapsulation is the practice of bundling data and the methods that operate on that data within a single unit, or "class". It's a protective wrapper that prevents the data from being accessed and modified by code outside the class.
 
-4.  **Polymorphism**: This is the ability of an object to take on many forms. In JavaScript, polymorphism is typically achieved through method overriding, where a subclass provides its own implementation of a method that is already defined in its superclass.
+The primary goal of encapsulation is **data hiding**. By making the data members of a class private (using the `#` prefix), we prevent external code from directly manipulating them. Instead, we provide public methods, including **getters and setters**, which allow controlled access to that data.
+
+This approach has several advantages:
+-   **Control**: We can enforce validation rules in our setters (e.g., ensuring an age is a positive number).
+-   **Security**: It protects the internal state of an object from accidental or malicious corruption.
+-   **Flexibility**: We can change the internal implementation of the class without breaking the code that uses it, as long as the public methods remain the same.
+
+The `Access Modifiers` and `Getters and Setters` sections and their corresponding examples demonstrate how to achieve encapsulation in JavaScript.
 
 ## Why is OOP Necessary?
 
