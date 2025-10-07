@@ -41,6 +41,67 @@ In JavaScript, the `constructor` is a special method for creating and initializi
 1.  **Default Constructor**: A constructor that takes no arguments. If you don't define a constructor, a default one is provided.
 2.  **Parameterized Constructor**: A constructor that accepts arguments to initialize the properties of the object.
 
+### Constructor Overloading
+
+JavaScript does not support constructor overloading in the same way as languages like C++. A class can only have one constructor.
+
+However, you can achieve similar functionality by using default parameters or by checking the number and type of arguments passed to the constructor.
+
+## The `this` Keyword
+
+In JavaScript, the `this` keyword refers to the context in which a function is executed. Its value is determined by how the function is called, not where it is defined.
+
+-   **What is `this`?** It's a special keyword that refers to the object that is currently executing the code.
+-   **How `this` is determined:**
+    1.  **Global context**: In the global execution context (outside of any function), `this` refers to the global object (e.g., `window` in browsers, `global` in Node.js).
+    2.  **Object method**: When a function is called as a method of an object, `this` refers to the object itself.
+    3.  **Constructor**: When a function is used as a constructor (with the `new` keyword), `this` refers to the newly created instance.
+    4.  **Explicit binding**: Methods like `call()`, `apply()`, and `bind()` can explicitly set the value of `this`.
+    5.  **Arrow functions**: Arrow functions do not have their own `this` context; they inherit `this` from their enclosing lexical context.
+
+### JavaScript Example
+
+```javascript
+// 1. Global context
+console.log(this === window); // In browsers, true (or global in Node.js)
+
+// 2. Object method
+const person = {
+    name: "Lohit",
+    greet: function() {
+        console.log(`Hello, my name is ${this.name}`);
+    }
+};
+person.greet(); // 'this' refers to 'person'
+
+// 3. Constructor
+class Car {
+    constructor(make) {
+        this.make = make;
+    }
+}
+const myCar = new Car("Toyota");
+console.log(myCar.make); // 'this' refers to 'myCar'
+
+// 4. Explicit binding with call()
+function introduce(age) {
+    console.log(`I am ${this.name} and I am ${age} years old.`);
+}
+introduce.call(person, 21); // 'this' is explicitly set to 'person'
+
+// 5. Arrow function (lexical 'this')
+const anotherPerson = {
+    name: "Jane",
+    sayHello: function() {
+        const innerFunction = () => {
+            console.log(`Hi, I'm ${this.name}`); // 'this' is inherited from sayHello's context (anotherPerson)
+        };
+        innerFunction();
+    }
+};
+anotherPerson.sayHello();
+```
+
 ## Why is OOP Necessary?
 
 OOP offers several benefits, including:
@@ -306,6 +367,25 @@ console.log(`Name: ${s1.name}`);
 console.log(`Age: ${s1.age}`);
 ```
 
+## Constructors
+
+In JavaScript, the `constructor` is a special method for creating and initializing an object created with a `class`.
+
+-   **What is it?** A special method for creating and initializing an object. There can only be one special method with the name "constructor" in a class.
+-   **Is it public or private?** The constructor method is public.
+-   **What if you don't mention a constructor?** If you do not provide a constructor, a default constructor is created for you. For a base class, the default constructor is `constructor() {}`. For a derived class, the default constructor is `constructor(...args) { super(...args); }`.
+
+### Types of Constructors in JavaScript
+
+1.  **Default Constructor**: A constructor that takes no arguments. If you don't define a constructor, a default one is provided.
+2.  **Parameterized Constructor**: A constructor that accepts arguments to initialize the properties of the object.
+
+### Constructor Overloading
+
+JavaScript does not support constructor overloading in the same way as languages like C++. A class can only have one constructor.
+
+However, you can achieve similar functionality by using default parameters or by checking the number and type of arguments passed to the constructor.
+
 ## Examples
 
 - [Public Example](./L2_public.js)
@@ -314,3 +394,5 @@ console.log(`Age: ${s1.age}`);
 - [Getters and Setters Example](./L3_getters_setters.js)
 - [Default Constructor Example](./L4_default_constructor.js)
 - [Parameterized Constructor Example](./L4_parameterized_constructor.js)
+- [Constructor Overloading Workaround Example](./L5_constructor_overloading_workaround.js)
+- [The `this` Keyword Example](./L6_this_keyword.js)

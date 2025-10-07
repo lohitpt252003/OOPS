@@ -41,6 +41,41 @@ In Python, the `__init__()` method is the constructor. It is automatically calle
 1.  **Default Constructor**: A constructor that doesn't accept any arguments (other than `self`). Python provides this by default if no other constructor is defined.
 2.  **Parameterized Constructor**: A constructor that accepts arguments (in addition to `self`) to initialize the object's attributes.
 
+### Constructor Overloading
+
+Python does not support constructor overloading in the same way as C++. If you define multiple `__init__` methods, the last one will override the previous ones.
+
+However, you can achieve similar functionality by using default arguments in the `__init__` method.
+
+## The `self` Parameter
+
+In Python, `self` is the first parameter of any instance method. It refers to the instance of the class itself. It is a convention, not a keyword, but it is universally used and expected.
+
+-   **What is `self`?** It's a reference to the instance of the class on which the method is called. It allows methods to access the attributes and other methods of that instance.
+-   **When is it used?**
+    1.  **To access instance variables**: `self.attribute_name` is used to access or modify an instance's attributes.
+    2.  **To call other instance methods**: `self.method_name()` is used to call other methods within the same instance.
+    3.  **As the first parameter**: Every instance method must have `self` as its first parameter. When you call a method on an object (e.g., `my_object.method()`), Python automatically passes `my_object` as the `self` argument.
+
+### Python Example
+
+```python
+class Dog:
+    def __init__(self, name, breed):
+        self.name = name  # Accessing instance variable 'name'
+        self.breed = breed # Accessing instance variable 'breed'
+
+    def bark(self):
+        print(f"{self.name} says Woof!") # Using self.name
+
+    def describe(self):
+        self.bark() # Calling another instance method using self
+        print(f"This is {self.name}, a {self.breed}.")
+
+my_dog = Dog("Buddy", "Golden Retriever")
+my_dog.describe()
+```
+
 ## Why is OOP Necessary?
 
 OOP offers several benefits, including:
@@ -157,11 +192,11 @@ class ClassName:
         print(self.attribute1)
 
 # Creating an object (instance) of the class
-objectName = ClassName(value1, value2)
+objectName = ClassName(value1, value2);
 
 # Accessing attributes and methods
-print(objectName.attribute1)
-objectName.methodName()
+print(objectName.attribute1);
+objectName.methodName();
 ```
 
 **Key Points for Python:**
@@ -294,6 +329,25 @@ print(f"New Name: {s1.name}")
 print(f"New Age: {s1.age}")
 ```
 
+## Constructors
+
+In Python, the `__init__()` method is the constructor. It is automatically called when a new object of a class is created.
+
+-   **What is it?** The `__init__()` method is a special method used to initialize the attributes of an object.
+-   **Is it public or private?** The `__init__()` method is a public method.
+-   **What if you don't mention a constructor?** If you do not define an `__init__()` method, Python provides a default one that does nothing.
+
+### Types of Constructors in Python
+
+1.  **Default Constructor**: A constructor that doesn't accept any arguments (other than `self`). Python provides this by default if no other constructor is defined.
+2.  **Parameterized Constructor**: A constructor that accepts arguments (in addition to `self`) to initialize the object's attributes.
+
+### Constructor Overloading
+
+Python does not support constructor overloading in the same way as C++. If you define multiple `__init__` methods, the last one will override the previous ones.
+
+However, you can achieve similar functionality by using default arguments in the `__init__` method.
+
 ## Examples
 
 - [Public Example](./L2_public.py)
@@ -302,3 +356,4 @@ print(f"New Age: {s1.age}")
 - [Getters and Setters Example](./L3_getters_setters.py)
 - [Default Constructor Example](./L4_default_constructor.py)
 - [Parameterized Constructor Example](./L4_parameterized_constructor.py)
+- [Constructor Overloading Workaround Example](./L5_constructor_overloading_workaround.py)

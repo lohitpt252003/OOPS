@@ -42,6 +42,74 @@ A constructor is a special member function of a class that is automatically call
 2.  **Parameterized Constructor**: A constructor that accepts arguments to initialize the data members.
 3.  **Copy Constructor**: A constructor that creates an object by initializing it with an object of the same class, which has been created previously.
 
+### Constructor Overloading
+
+Constructor overloading is a concept of having more than one constructor in a class with a different list of parameters. Each constructor performs a different task. C++ allows constructor overloading.
+
+## The `this` Pointer
+
+In C++, `this` is a keyword that represents a pointer to the current object. It is an implicit parameter to all non-static member functions.
+
+-   **What is `this`?** It's a pointer that holds the memory address of the object on which the member function is called.
+-   **When is it used?**
+    1.  **To refer to the current object's members**: When a local variable has the same name as a member variable, `this` can be used to explicitly refer to the member variable.
+    2.  **To return the current object**: Member functions can return `*this` to allow for method chaining.
+    3.  **To pass the current object as an argument**: When a function requires an object reference or pointer as an argument, `this` can be used.
+
+### C++ Example
+
+```cpp
+#include <iostream>
+#include <string>
+
+class Box {
+private:
+    double length;
+    double breadth;
+    double height;
+
+public:
+    // Constructor
+    Box(double length, double breadth, double height) {
+        // Using 'this' to distinguish between member variables and parameters
+        this->length = length;
+        this->breadth = breadth;
+        this->height = height;
+    }
+
+    double calculateVolume() {
+        return length * breadth * height;
+    }
+
+    // Function that returns the current object by reference
+    Box& setLength(double length) {
+        this->length = length;
+        return *this; // Returns the current object
+    }
+
+    Box& setBreadth(double breadth) {
+        this->breadth = breadth;
+        return *this;
+    }
+
+    Box& setHeight(double height) {
+        this->height = height;
+        return *this;
+    }
+};
+
+int main() {
+    Box box1(10.0, 5.0, 2.0);
+    std::cout << "Volume of box1: " << box1.calculateVolume() << std::endl;
+
+    // Method chaining using 'this' pointer
+    box1.setLength(15.0).setBreadth(7.0).setHeight(3.0);
+    std::cout << "New volume of box1: " << box1.calculateVolume() << std::endl;
+
+    return 0;
+}
+```
+
 ## Why is OOP Necessary?
 
 OOP offers several benefits, including:
@@ -375,6 +443,24 @@ int main() {
 }
 ```
 
+## Constructors
+
+A constructor is a special member function of a class that is automatically called when an object of that class is created. Its primary job is to initialize the object's data members.
+
+-   **What is it?** A constructor has the same name as the class and does not have a return type. It's used to set initial values for attributes.
+-   **Is it public or private?** Constructors are typically declared in the `public` section of the class. A `private` constructor can be used to prevent the creation of objects of a class, which is useful in specific design patterns like the Singleton pattern.
+-   **What if you don't mention a constructor?** If you do not define any constructor, the C++ compiler provides a **default constructor** on its own. This default constructor does not accept any parameters and has an empty body.
+
+### Types of Constructors in C++
+
+1.  **Default Constructor**: A constructor that takes no arguments. If you don't define any constructor, the compiler creates one for you.
+2.  **Parameterized Constructor**: A constructor that accepts arguments to initialize the data members.
+3.  **Copy Constructor**: A constructor that creates an object by initializing it with an object of the same class, which has been created previously.
+
+### Constructor Overloading
+
+Constructor overloading is a concept of having more than one constructor in a class with a different list of parameters. Each constructor performs a different task. C++ allows constructor overloading.
+
 ## Examples
 
 - [Public Example](./L2_public.cpp)
@@ -384,3 +470,4 @@ int main() {
 - [Default Constructor Example](./L4_default_constructor.cpp)
 - [Parameterized Constructor Example](./L4_parameterized_constructor.cpp)
 - [Copy Constructor Example](./L4_copy_constructor.cpp)
+- [Constructor Overloading Example](./L5_constructor_overloading.cpp)
