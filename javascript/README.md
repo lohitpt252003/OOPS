@@ -110,3 +110,122 @@ teacher1.displayDetails();
     ```bash
 node teacher_example.js
     ```
+
+## JavaScript Class Syntax Details
+
+JavaScript classes are primarily syntactic sugar over its existing prototype-based inheritance. They are defined using the `class` keyword.
+
+```javascript
+class ClassName {
+    // Constructor (special method for creating and initializing objects)
+    constructor(attribute1, attribute2) {
+        this.attribute1 = attribute1; // 'this' refers to the current object
+        this.attribute2 = attribute2;
+    }
+
+    // Instance method
+    methodName() {
+        // Code for the method
+        console.log(this.attribute1);
+    }
+}
+
+// Creating an object (instance) of the class
+const objectName = new ClassName(value1, value2);
+
+// Accessing attributes and methods
+console.log(objectName.attribute1);
+objectName.methodName();
+```
+
+**Key Points for JavaScript:**
+*   **`class ClassName { ... }`**: Defines the class.
+*   **`constructor()`**: A special method for creating and initializing an object created with a class.
+*   **`this` keyword**: Refers to the current instance of the class.
+*   **No explicit access modifiers**: By convention, properties intended to be private might be prefixed with `_` (e.g., `_privateAttribute`), but they are still technically accessible.
+
+## Access Modifiers in JavaScript
+
+JavaScript, traditionally, did not have built-in access modifiers like `public`, `private`, or `protected`. Encapsulation was achieved through conventions and closures. However, modern JavaScript (ES2022) has introduced a syntax for true private class members.
+
+1.  **Public**: By default, all members (properties and methods) of a JavaScript class are public. They can be accessed from anywhere.
+2.  **Private (Convention)**: A common convention is to prefix a member's name with an underscore (`_`) to indicate that it is intended for internal use and should not be accessed from outside the class. However, this is just a hint for developers, and it doesn't prevent access.
+3.  **Private (Modern Syntax)**: The `#` prefix (hash) is used to declare true private class members. These members are only accessible from within the class and are completely hidden from the outside. Attempting to access a private member from outside the class will result in a `SyntaxError`.
+
+### JavaScript Example with Access Modifiers
+
+Here’s how the `Teacher` class can be written using both the underscore convention and the new `#` syntax for privacy.
+
+```javascript
+class Teacher {
+    // Public properties
+    department;
+    subject;
+
+    // Private properties
+    #name;
+    #salary;
+
+    constructor(name, department, salary, subject) {
+        this.#name = name;
+        this.department = department;
+        this.#salary = salary;
+        this.subject = subject;
+    }
+
+    // Public method
+    displayDetails() {
+        console.log(`Name: ${this.#name}`);
+        console.log(`Department: ${this.department}`);
+        console.log(`Salary: ${this.#salary}`);
+        console.log(`Subject: ${this.subject}`);
+    }
+
+    // Getter for name
+    getName() {
+        return this.#name;
+    }
+
+    // Setter for name
+    setName(name) {
+        this.#name = name;
+    }
+}
+
+const teacher1 = new Teacher("Dr. Smith", "Computer Science", 60000.0, "Programming");
+
+// Accessing data through public methods
+console.log(`Teacher's Name: ${teacher1.getName()}`);
+
+// Changing data through a public method
+teacher1.setName("Dr. Jane Smith");
+console.log(`Updated Teacher's Name: ${teacher1.getName()}`);
+
+teacher1.displayDetails();
+
+// The following lines would cause an error because #name is a private field
+// console.log(teacher1.#name); // SyntaxError
+// teacher1.#name = "Dr. John Smith"; // SyntaxError
+```
+
+This example shows how modern JavaScript can enforce encapsulation, making code more robust and secure.
+
+## Default Access Modifier
+
+In JavaScript, all class members (properties and methods) are **`public`** by default. There is no `public` keyword; if a member is not explicitly marked as private with `#`, it is public.
+
+### Example
+
+```javascript
+class MyClass {
+    myPublicProperty = 10; // This is public by default
+
+    myPublicMethod() { // This is also public by default
+        console.log("This is a public method.");
+    }
+}
+
+const instance = new MyClass();
+console.log(instance.myPublicProperty); // 10
+instance.myPublicMethod(); // "This is a public method."
+```

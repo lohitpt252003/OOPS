@@ -143,3 +143,144 @@ g++ teacher_example.cpp -o teacher_example
     ```bash
 ./teacher_example
     ```
+
+## C++ Class Syntax Details
+
+In C++, a class is defined using the `class` keyword, followed by the class name and a block of code enclosed in curly braces `{}`. It's important to end the class definition with a semicolon `;`.
+
+```cpp
+class ClassName {
+public: // Access specifier (members below are accessible from outside the class)
+    // Member variables (attributes)
+    DataType attribute1;
+    DataType attribute2;
+
+    // Constructor (special method called when an object is created)
+    ClassName(ParameterType param1, ParameterType param2) {
+        attribute1 = param1;
+        attribute2 = param2;
+    }
+
+    // Member functions (methods)
+    void methodName() {
+        // Code for the method
+    }
+}; // Don't forget the semicolon!
+
+int main() {
+    // Creating an object (instance) of the class
+    ClassName objectName(value1, value2);
+
+    // Accessing attributes and methods
+    objectName.attribute1 = newValue; // If attribute1 is public
+    objectName.methodName();
+    return 0;
+}
+```
+
+**Key Points for C++:**
+*   **`class ClassName { ... };`**: Defines the class.
+*   **Access Specifiers (`public`, `private`, `protected`)**: Control the visibility and accessibility of class members. By default, members are `private`.
+*   **Constructor**: A method with the same name as the class, used to initialize objects.
+*   **`main()` function**: Where the program execution begins and objects are typically created and used.
+
+## Access Modifiers in C++
+
+Access modifiers in C++ are keywords that set the accessibility of class members (attributes and methods). They are crucial for implementing **encapsulation**, which bundles data and the methods that operate on that data, restricting direct access to some of an object's components.
+
+C++ has three access modifiers:
+
+1.  **`public`**: Members are accessible from anywhere outside the class. This is the least restrictive access level.
+2.  **`private`**: Members are only accessible from within the class itself. They cannot be accessed from outside the class, not even by derived classes (subclasses). By default, members of a class are `private`.
+3.  **`protected`**: Members are accessible within the class and by derived classes (subclasses), but not from outside.
+
+### C++ Example with Access Modifiers
+
+Let's modify the `Teacher` class to use access modifiers properly. We'll make the attributes `private` and provide `public` methods (getters and setters) to access them.
+
+```cpp
+#include <iostream>
+#include <string>
+
+class Teacher {
+private:
+    std::string name;
+    std::string department;
+    double salary;
+    std::string subject;
+
+public:
+    // Constructor
+    Teacher(std::string n, std::string d, double s, std::string sub) {
+        name = n;
+        department = d;
+        salary = s;
+        subject = sub;
+    }
+
+    // Public method to display details
+    void displayDetails() {
+        std::cout << "Name: " << name << std::endl;
+        std::cout << "Department: " << department << std::endl;
+        std::cout << "Salary: " << salary << std::endl;
+        std::cout << "Subject: " << subject << std::endl;
+    }
+
+    // Getter for name
+    std::string getName() {
+        return name;
+    }
+
+    // Setter for name
+    void setName(std::string n) {
+        name = n;
+    }
+};
+
+int main() {
+    Teacher teacher1("Dr. Smith", "Computer Science", 60000.0, "Programming");
+
+    // Accessing data through public methods
+    std::cout << "Teacher's Name: " << teacher1.getName() << std::endl;
+
+    // Changing data through a public method
+    teacher1.setName("Dr. Jane Smith");
+    std::cout << "Updated Teacher's Name: " << teacher1.getName() << std::endl;
+
+    teacher1.displayDetails();
+
+    // The following line would cause a compile error because 'name' is private
+    // teacher1.name = "Dr. John Smith"; // Error: 'std::string Teacher::name' is private
+
+    return 0;
+}
+```
+
+This example demonstrates how `private` members hide the data, and `public` methods provide controlled access. This prevents direct, uncontrolled modification of the object's state.
+
+## Default Access Modifier
+
+In C++, if you don't specify an access modifier for members of a `class`, they are **`private`** by default.
+
+For `struct`, the default access modifier is **`public`**.
+
+### Example
+
+```cpp
+class MyClass {
+    int i; // This is private by default
+};
+
+struct MyStruct {
+    int i; // This is public by default
+};
+
+int main() {
+    MyClass c;
+    // c.i = 10; // Compile Error: 'i' is private
+
+    MyStruct s;
+    s.i = 10; // OK: 'i' is public
+    return 0;
+}
+```

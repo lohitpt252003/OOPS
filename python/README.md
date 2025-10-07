@@ -67,7 +67,7 @@ class Teacher:
 teacher1 = Teacher("Dr. Smith", "Computer Science", 60000.0, "Programming")
 teacher1.display_details()
 
-teacher2 = Teacher("Ms. Johnson", "Mathematics", 55000.0, "Algebra")
+teacher2 = Teacher("Ms. Johnson", "Mathematics", 55000.0, "Algebra");
 teacher2.display_details()
 ```
 
@@ -105,30 +105,114 @@ teacher1.display_details()
 python teacher_example.py
     ```
 
-## Case Study: Teacher Class
+## Python Class Syntax Details
 
-Let's consider a `Teacher` class to illustrate OOP concepts. A `Teacher` can have attributes like `name`, `department`, `salary`, and `subject`.
+In Python, a class is defined using the `class` keyword, followed by the class name and a colon `:`. Indentation defines the class body.
 
-### Python Example
+```python
+class ClassName:
+    # Constructor (special method for initializing objects)
+    def __init__(self, attribute1, attribute2):
+        self.attribute1 = attribute1 # 'self' refers to the current object
+        self.attribute2 = attribute2
+
+    # Instance method
+    def methodName(self):
+        # Code for the method
+        print(self.attribute1)
+
+# Creating an object (instance) of the class
+objectName = ClassName(value1, value2)
+
+# Accessing attributes and methods
+print(objectName.attribute1)
+objectName.methodName()
+```
+
+**Key Points for Python:**
+*   **`class ClassName:`**: Defines the class.
+*   **`__init__(self, ...)`**: The constructor method, automatically called when a new object is created. `self` is a reference to the instance of the class.
+*   **`self` parameter**: Must be the first parameter of any instance method, referring to the instance itself.
+*   **No explicit access modifiers**: Python uses conventions for "private" members (e.g., `_attribute` for protected, `__attribute` for name mangling), but they are not strictly enforced. All members are technically accessible.
+
+
+## Access Modifiers in Python
+
+Python does not have strict access modifiers like C++ or Java. Instead, it relies on naming conventions to indicate the intended visibility of class members. This philosophy is sometimes summarized as "we're all consenting adults here."
+
+1.  **Public**: By default, all members of a class are public. They can be accessed from anywhere.
+2.  **Protected (by convention)**: A single underscore prefix (e.g., `_salary`) is a convention to indicate that a member is "protected" and intended for internal use or for use by subclasses. It's a hint to other programmers that a member is not part of the public API of the class and could change without notice. However, it does not prevent access.
+3.  **Private (by convention)**: A double underscore prefix (e.g., `__name`) triggers "name mangling." The interpreter changes the name of the attribute to `_ClassName__attributeName`, making it harder to access from outside the class. This is not true privacy, but it's a stronger signal than the single underscore.
+
+### Python Example with Access Modifiers
+
+Here’s how the `Teacher` class can be written using these conventions.
 
 ```python
 class Teacher:
     def __init__(self, name, department, salary, subject):
-        self.name = name
-        self.department = department
-        self.salary = salary
+        self.__name = name  # Private attribute
+        self.department = department  # Public attribute
+        self._salary = salary  # Protected attribute
         self.subject = subject
 
     def display_details(self):
-        print(f"Name: {self.name}")
+        print(f"Name: {self.__name}")
         print(f"Department: {self.department}")
-        print(f"Salary: {self.salary}")
+        print(f"Salary: {self._salary}")
         print(f"Subject: {self.subject}")
 
-# Creating an object (instance) of the Teacher class
+    # Getter for name
+    def get_name(self):
+        return self.__name
+
+    # Setter for name
+    def set_name(self, name):
+        self.__name = name
+
+# Creating an object
 teacher1 = Teacher("Dr. Smith", "Computer Science", 60000.0, "Programming")
+
+# Accessing data through public methods
+print(f"Teacher's Name: {teacher1.get_name()}")
+
+# Changing data through a public method
+teacher1.set_name("Dr. Jane Smith")
+print(f"Updated Teacher's Name: {teacher1.get_name()}")
+
 teacher1.display_details()
 
-teacher2 = Teacher("Ms. Johnson", "Mathematics", 55000.0, "Algebra")
-teacher2.display_details()
+# Accessing a protected member (possible, but not recommended)
+print(f"Salary (protected): {teacher1._salary}")
+
+# Attempting to access a private member directly will fail
+try:
+    print(teacher1.__name)
+except AttributeError as e:
+    print(e)
+
+# Accessing the mangled name (possible, but strongly discouraged)
+print(f"Name (mangled): {teacher1._Teacher__name}")
+
+```
+
+This example illustrates Python's approach to encapsulation, which relies on programmer discipline and naming conventions rather than strict enforcement by the language.
+
+## Default Access Modifier
+
+In Python, all class members (attributes and methods) are **`public`** by default. There are no keywords to declare members as public; they are public unless their names start with underscores.
+
+### Example
+
+```python
+class MyClass:
+    def __init__(self):
+        self.my_public_property = 10
+
+    def my_public_method(self):
+        print("This is a public method.")
+
+instance = MyClass()
+print(instance.my_public_property) # 10
+instance.my_public_method() # "This is a public method."
 ```
