@@ -124,6 +124,36 @@ Common ways to perform a deep copy:
 -   **`JSON.parse(JSON.stringify(object))`**: This is a simple way to deep copy objects that are JSON-safe (i.e., contain no functions, `undefined`, `NaN`, `Infinity`, or circular references).
 -   **External libraries**: For complex objects or objects that are not JSON-safe, libraries like Lodash (`_.cloneDeep()`) are often used.
 
+## Destructors
+
+JavaScript does not have destructors in the same way as C++ or Python. Memory management is handled automatically by the garbage collector.
+
+-   **What is it?** There is no direct equivalent of a destructor in JavaScript.
+-   **Purpose:** Cleanup is handled by the garbage collector, which automatically reclaims memory that is no longer reachable.
+-   **When is it called?** You cannot predict when the garbage collector will run.
+
+For more advanced use cases, the `FinalizationRegistry` object provides a way to request that a cleanup callback be called when an object is garbage-collected. However, its use is complex and not recommended for beginners.
+
+### JavaScript Example
+
+```javascript
+class MyClass {
+    constructor(name) {
+        this.name = name;
+        console.log(`${this.name}: Constructor called`);
+    }
+}
+
+function run() {
+    let obj = new MyClass("myObject");
+    console.log("Object created");
+}
+
+run();
+console.log("Function 'run' has finished. The object is now out of scope and eligible for garbage collection, but there's no guaranteed destructor call.");
+
+```
+
 ## Why is OOP Necessary?
 
 OOP offers several benefits, including:
@@ -4816,15 +4846,51 @@ A deep copy creates a new object and recursively copies all nested objects. This
 Common ways to perform a deep copy:
 -   **`JSON.parse(JSON.stringify(object))`**: This is a simple way to deep copy objects that are JSON-safe (i.e., contain no functions, `undefined`, `NaN`, `Infinity`, or circular references).
 -   **External libraries**: For complex objects or objects that are not JSON-safe, libraries like Lodash (`_.cloneDeep()`) are often used.
+
+### JavaScript Example
+
+```javascript
+class Course {
+    constructor(title) {
+        this.title = title;
+    }
+}
+
+class Student {
+    constructor(name, course) {
+        this.name = name;
+        this.course = course;
+    }
+}
+
+// Original object
+const course1 = new Course("Math");
+const student1 = new Student("Lohit", course1);
+
+// Shallow copy
+const student2 = { ...student1 };
+
+// Deep copy
+const student3 = JSON.parse(JSON.stringify(student1));
+
+// Modify the course title
+student2.course.title = "Science";
+
+console.log(student1.course.title); // "Science"
+console.log(student2.course.title); // "Science"
+console.log(student3.course.title); // "Math"
+```
 
 ## Examples
 
 - [Public Example](./L2_public.js)
 - [Private Example](./L2_private.js)
-- [Protected Convention Example](./L2_protected_convention.js)
+- [Protected Example](./L2_protected_convention.js)
 - [Getters and Setters Example](./L3_getters_setters.js)
 - [Default Constructor Example](./L4_default_constructor.js)
 - [Parameterized Constructor Example](./L4_parameterized_constructor.js)
 - [Constructor Overloading Workaround Example](./L5_constructor_overloading_workaround.js)
 - [The `this` Keyword Example](./L6_this_keyword.js)
-- [Object Copying Example](./L7_object_copying.js)
+- [Default Copy Constructor Example](./L7_default_copy_constructor.js)
+- [Custom Copy Constructor Example](./L8_custom_copy_constructor.js)
+- [Destructor Example](./L9_destructor.js)

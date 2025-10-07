@@ -348,6 +348,80 @@ Python does not support constructor overloading in the same way as C++. If you d
 
 However, you can achieve similar functionality by using default arguments in the `__init__` method.
 
+## Copying Objects
+
+In Python, assignment statements do not copy objects. They create bindings between a target and an object. When we need a copy, we can use the `copy` module.
+
+### Shallow Copy
+
+A shallow copy creates a new object, but it does not create copies of nested objects. The new object will have references to the same nested objects as the original.
+
+### Deep Copy
+
+A deep copy creates a new object and recursively copies all nested objects.
+
+### Python Example
+
+```python
+import copy
+
+class Course:
+    def __init__(self, title):
+        self.title = title
+
+class Student:
+    def __init__(self, name, course):
+        self.name = name
+        self.course = course
+
+# Original object
+course1 = Course("Math")
+student1 = Student("Lohit", course1)
+
+# Shallow copy
+student2 = copy.copy(student1)
+
+# Deep copy
+student3 = copy.deepcopy(student1)
+
+# Modify the course title
+student2.course.title = "Science"
+
+print(student1.course.title)  # "Science"
+print(student2.course.title)  # "Science"
+print(student3.course.title)  # "Math"
+```
+
+## Destructors
+
+In Python, the `__del__` method is the destructor. It is called when an object's reference count becomes zero.
+
+-   **What is it?** The `__del__` method is a special method that is called when an object is about to be destroyed.
+-   **Purpose:** It can be used to perform cleanup tasks, such as closing file handles or database connections.
+-   **When is it called?** The `__del__` method is called when the garbage collector decides to destroy the object. This is not always predictable, so it's not recommended to rely on it for critical cleanup operations.
+
+### Python Example
+
+```python
+import time
+
+class MyClass:
+    def __init__(self, name):
+        self.name = name
+        print(f"{self.name}: Constructor called")
+
+    def __del__(self):
+        print(f"{self.name}: Destructor called")
+
+obj1 = MyClass("obj1")
+obj2 = obj1
+del obj1
+print("obj1 deleted")
+time.sleep(1)
+del obj2
+print("obj2 deleted")
+```
+
 ## Examples
 
 - [Public Example](./L2_public.py)
@@ -357,3 +431,6 @@ However, you can achieve similar functionality by using default arguments in the
 - [Default Constructor Example](./L4_default_constructor.py)
 - [Parameterized Constructor Example](./L4_parameterized_constructor.py)
 - [Constructor Overloading Workaround Example](./L5_constructor_overloading_workaround.py)
+- [Default Copy Constructor Example](./L7_default_copy_constructor.py)
+- [Custom Copy Constructor Example](./L8_custom_copy_constructor.py)
+- [Destructor Example](./L9_destructor.py)
