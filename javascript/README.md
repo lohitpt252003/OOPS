@@ -230,8 +230,50 @@ console.log(instance.myPublicProperty); // 10
 instance.myPublicMethod(); // "This is a public method."
 ```
 
+## Getters and Setters
+
+In JavaScript, getters and setters provide a way to get and set the values of an object's properties, while allowing for more control over how the properties are accessed and modified. They are defined using the `get` and `set` keywords.
+
+-   **Getters**: A getter is a method that gets the value of a specific property.
+-   **Setters**: A setter is a method that sets the value of a specific property. Setters can include validation logic.
+
+### JavaScript Example
+
+```javascript
+class Student {
+    #name;
+    #age;
+
+    get name() {
+        return this.#name;
+    }
+
+    set name(newName) {
+        this.#name = newName;
+    }
+
+    get age() {
+        return this.#age;
+    }
+
+    set age(newAge) {
+        if (newAge > 0) {
+            this.#age = newAge;
+        }
+    }
+}
+
+const s1 = new Student();
+s1.name = "Lohit";
+s1.age = 21;
+
+console.log(`Name: ${s1.name}`);
+console.log(`Age: ${s1.age}`);
+```
+
 ## Examples
 
 - [Public Example](./L2_public.js)
 - [Private Example](./L2_private.js)
 - [Protected Convention Example](./L2_protected_convention.js)
+- [Getters and Setters Example](./L3_getters_setters.js)

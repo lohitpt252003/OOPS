@@ -285,8 +285,63 @@ int main() {
 }
 ```
 
+## Getters and Setters
+
+Getters and setters are methods used to retrieve (get) and update (set) the values of private class attributes. They provide a layer of abstraction and control over how an object's data is accessed and modified.
+
+-   **Getters (Accessors)**: Methods that return the value of a private attribute. They are typically named `getX()` where `X` is the attribute name.
+-   **Setters (Mutators)**: Methods that set the value of a private attribute. They can include validation logic to ensure the new value is valid. They are typically named `setX()` where `X` is the attribute name.
+
+### C++ Example
+
+```cpp
+#include <iostream>
+#include <string>
+
+class Student {
+private:
+    std::string name;
+    int age;
+
+public:
+    // Setter for name
+    void setName(std::string n) {
+        name = n;
+    }
+
+    // Getter for name
+    std::string getName() {
+        return name;
+    }
+
+    // Setter for age
+    void setAge(int a) {
+        if (a > 0) { // Basic validation
+            age = a;
+        }
+    }
+
+    // Getter for age
+    int getAge() {
+        return age;
+    }
+};
+
+int main() {
+    Student s1;
+    s1.setName("Lohit");
+    s1.setAge(21);
+
+    std::cout << "Name: " << s1.getName() << std::endl;
+    std::cout << "Age: " << s1.getAge() << std::endl;
+
+    return 0;
+}
+```
+
 ## Examples
 
 - [Public Example](./L2_public.cpp)
 - [Private Example](./L2_private.cpp)
 - [Protected Example](./L2_protected.cpp)
+- [Getters and Setters Example](./L3_getters_setters.cpp)

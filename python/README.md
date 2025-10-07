@@ -212,9 +212,51 @@ class MyClass:
     def my_public_method(self):
         print("This is a public method.")
 
-instance = MyClass()
+instance = new MyClass()
 print(instance.my_public_property) # 10
 instance.my_public_method() # "This is a public method."
+```
+
+## Getters and Setters
+
+In Python, getters and setters are used to control access to attributes. The Pythonic way to implement them is by using the `@property` decorator.
+
+-   **Getter**: The method that gets the value of an attribute is decorated with `@property`.
+-   **Setter**: The method that sets the value of an attribute is decorated with `@<attribute_name>.setter`. This allows for validation before assigning the value.
+
+### Python Example
+
+```python
+class Student:
+    def __init__(self, name, age):
+        self._name = name
+        self._age = age
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, new_name):
+        self._name = new_name
+
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, new_age):
+        if new_age > 0:
+            self._age = new_age
+
+s1 = Student("Lohit", 21)
+print(f"Name: {s1.name}")
+print(f"Age: {s1.age}")
+
+s1.name = "Lohit P T"
+s1.age = 22
+print(f"New Name: {s1.name}")
+print(f"New Age: {s1.age}")
 ```
 
 ## Examples
@@ -222,3 +264,4 @@ instance.my_public_method() # "This is a public method."
 - [Public Example](./L2_public.py)
 - [Private Example](./L2_private.py)
 - [Protected Example](./L2_protected.py)
+- [Getters and Setters Example](./L3_getters_setters.py)
