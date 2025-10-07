@@ -6,6 +6,18 @@ This folder contains examples and implementations of Object-Oriented Programming
 
 Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code: data in the form of fields (often known as attributes or properties), and code in the form of procedures (often known as methods).
 
+## Pillars of OOP
+
+Object-Oriented Programming is built on four main principles, often called the pillars of OOP:
+
+1.  **Encapsulation**: This is the bundling of data (attributes) and methods that operate on the data into a single unit, a class. It restricts direct access to some of an object's components. In Python, this is achieved by convention using single (`_`) and double (`__`) underscores to indicate non-public members.
+
+2.  **Abstraction**: Abstraction means hiding the complex implementation details and showing only the essential features of the object. It helps in managing complexity. In Python, this can be achieved using abstract base classes (ABCs) from the `abc` module.
+
+3.  **Inheritance**: This is a mechanism where a new class (subclass) inherits properties and behaviors (methods) from an existing class (superclass). It promotes code reusability.
+
+4.  **Polymorphism**: This is the ability of an object to take on many forms. In Python, polymorphism allows objects of different classes to be treated as objects of a common superclass. This is often achieved through method overriding. Due to Python's dynamic typing (duck typing), polymorphism is a natural feature of the language.
+
 ## Why is OOP Necessary?
 
 OOP offers several benefits, including:

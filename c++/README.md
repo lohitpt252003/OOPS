@@ -6,6 +6,18 @@ This folder contains examples and implementations of Object-Oriented Programming
 
 Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code: data in the form of fields (often known as attributes or properties), and code in the form of procedures (often known as methods).
 
+## Pillars of OOP
+
+Object-Oriented Programming is built on four main principles, often called the pillars of OOP:
+
+1.  **Encapsulation**: This is the bundling of data (attributes) and methods that operate on the data into a single unit, a class. It restricts direct access to some of an object's components, which is a means of preventing accidental interference and misuse of the data. Access control (public, private, protected) is the mechanism to achieve encapsulation.
+
+2.  **Abstraction**: Abstraction means hiding the complex implementation details and showing only the essential features of the object. It helps in managing complexity by allowing us to focus on what an object does instead of how it does it. For example, a driver of a car doesn't need to know the internal workings of the engine to drive it.
+
+3.  **Inheritance**: This is a mechanism where a new class (derived or child class) inherits properties and behaviors (methods) from an existing class (base or parent class). It promotes code reusability and establishes a relationship between the classes.
+
+4.  **Polymorphism**: This is the ability of an object to take on many forms. In OOP, it allows objects of different classes to be treated as objects of a common superclass. The most common use of polymorphism in OOP is when a parent class reference is used to refer to a child class object. This can be achieved through function overloading (compile-time polymorphism) and virtual functions (runtime polymorphism).
+
 ## Why is OOP Necessary?
 
 OOP offers several benefits, including:

@@ -6,6 +6,18 @@ This folder contains examples and implementations of Object-Oriented Programming
 
 Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code: data in the form of fields (often known as attributes or properties), and code in the form of procedures (often known as methods).
 
+## Pillars of OOP
+
+Object-Oriented Programming is built on four main principles, often called the pillars of OOP:
+
+1.  **Encapsulation**: This is the bundling of data (attributes) and methods that operate on the data into a single unit, a class. It restricts direct access to some of an object's components. In JavaScript, encapsulation is achieved using private class fields (`#`) and closures.
+
+2.  **Abstraction**: Abstraction means hiding the complex implementation details and showing only the essential features of the object. It helps in managing complexity by allowing us to focus on what an object does instead of how it does it. For example, a developer using a library doesn't need to know how a function is implemented internally to use it.
+
+3.  **Inheritance**: This is a mechanism where a new class (subclass) inherits properties and behaviors (methods) from an existing class (superclass) using the `extends` keyword. It promotes code reusability.
+
+4.  **Polymorphism**: This is the ability of an object to take on many forms. In JavaScript, polymorphism is typically achieved through method overriding, where a subclass provides its own implementation of a method that is already defined in its superclass.
+
 ## Why is OOP Necessary?
 
 OOP offers several benefits, including:
