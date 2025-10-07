@@ -28,6 +28,20 @@ This approach has several advantages:
 
 The `Access Modifiers` and `Getters and Setters` sections and their corresponding examples demonstrate how to achieve encapsulation in C++.
 
+## Constructors
+
+A constructor is a special member function of a class that is automatically called when an object of that class is created. Its primary job is to initialize the object's data members.
+
+-   **What is it?** A constructor has the same name as the class and does not have a return type. It's used to set initial values for attributes.
+-   **Is it public or private?** Constructors are typically declared in the `public` section of the class. A `private` constructor can be used to prevent the creation of objects of a class, which is useful in specific design patterns like the Singleton pattern.
+-   **What if you don't mention a constructor?** If you do not define any constructor, the C++ compiler provides a **default constructor** on its own. This default constructor does not accept any parameters and has an empty body.
+
+### Types of Constructors in C++
+
+1.  **Default Constructor**: A constructor that takes no arguments. If you don't define any constructor, the compiler creates one for you.
+2.  **Parameterized Constructor**: A constructor that accepts arguments to initialize the data members.
+3.  **Copy Constructor**: A constructor that creates an object by initializing it with an object of the same class, which has been created previously.
+
 ## Why is OOP Necessary?
 
 OOP offers several benefits, including:
@@ -367,3 +381,6 @@ int main() {
 - [Private Example](./L2_private.cpp)
 - [Protected Example](./L2_protected.cpp)
 - [Getters and Setters Example](./L3_getters_setters.cpp)
+- [Default Constructor Example](./L4_default_constructor.cpp)
+- [Parameterized Constructor Example](./L4_parameterized_constructor.cpp)
+- [Copy Constructor Example](./L4_copy_constructor.cpp)

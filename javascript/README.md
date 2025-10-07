@@ -28,6 +28,19 @@ This approach has several advantages:
 
 The `Access Modifiers` and `Getters and Setters` sections and their corresponding examples demonstrate how to achieve encapsulation in JavaScript.
 
+## Constructors
+
+In JavaScript, the `constructor` is a special method for creating and initializing an object created with a `class`.
+
+-   **What is it?** A special method for creating and initializing an object. There can only be one special method with the name "constructor" in a class.
+-   **Is it public or private?** The constructor method is public.
+-   **What if you don't mention a constructor?** If you do not provide a constructor, a default constructor is created for you. For a base class, the default constructor is `constructor() {}`. For a derived class, the default constructor is `constructor(...args) { super(...args); }`.
+
+### Types of Constructors in JavaScript
+
+1.  **Default Constructor**: A constructor that takes no arguments. If you don't define a constructor, a default one is provided.
+2.  **Parameterized Constructor**: A constructor that accepts arguments to initialize the properties of the object.
+
 ## Why is OOP Necessary?
 
 OOP offers several benefits, including:
@@ -299,3 +312,5 @@ console.log(`Age: ${s1.age}`);
 - [Private Example](./L2_private.js)
 - [Protected Convention Example](./L2_protected_convention.js)
 - [Getters and Setters Example](./L3_getters_setters.js)
+- [Default Constructor Example](./L4_default_constructor.js)
+- [Parameterized Constructor Example](./L4_parameterized_constructor.js)

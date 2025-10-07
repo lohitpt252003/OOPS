@@ -28,6 +28,19 @@ This approach has several advantages:
 
 The `Access Modifiers` and `Getters and Setters` sections and their corresponding examples demonstrate how to achieve encapsulation in Python.
 
+## Constructors
+
+In Python, the `__init__()` method is the constructor. It is automatically called when a new object of a class is created.
+
+-   **What is it?** The `__init__()` method is a special method used to initialize the attributes of an object.
+-   **Is it public or private?** The `__init__()` method is a public method.
+-   **What if you don't mention a constructor?** If you do not define an `__init__()` method, Python provides a default one that does nothing.
+
+### Types of Constructors in Python
+
+1.  **Default Constructor**: A constructor that doesn't accept any arguments (other than `self`). Python provides this by default if no other constructor is defined.
+2.  **Parameterized Constructor**: A constructor that accepts arguments (in addition to `self`) to initialize the object's attributes.
+
 ## Why is OOP Necessary?
 
 OOP offers several benefits, including:
@@ -287,3 +300,5 @@ print(f"New Age: {s1.age}")
 - [Private Example](./L2_private.py)
 - [Protected Example](./L2_protected.py)
 - [Getters and Setters Example](./L3_getters_setters.py)
+- [Default Constructor Example](./L4_default_constructor.py)
+- [Parameterized Constructor Example](./L4_parameterized_constructor.py)
