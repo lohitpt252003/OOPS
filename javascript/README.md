@@ -229,3 +229,9 @@ const instance = new MyClass();
 console.log(instance.myPublicProperty); // 10
 instance.myPublicMethod(); // "This is a public method."
 ```
+
+## Examples
+
+- [Public Example](./L2_public.js)
+- [Private Example](./L2_private.js)
+- [Protected Convention Example](./L2_protected_convention.js)
