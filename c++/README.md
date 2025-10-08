@@ -26,25 +26,12 @@ This approach has several advantages:
 -   **Security**: It protects the internal state of an object from accidental or malicious corruption.
 -   **Flexibility**: We can change the internal implementation of the class without breaking the code that uses it, as long as the public methods remain the same.
 
-The `Access Modifiers` and `Getters and Setters` sections and their corresponding examples demonstrate how to achieve encapsulation in C++.
-
-## Constructors
-
-A constructor is a special member function of a class that is automatically called when an object of that class is created. Its primary job is to initialize the object's data members.
-
--   **What is it?** A constructor has the same name as the class and does not have a return type. It's used to set initial values for attributes.
--   **Is it public or private?** Constructors are typically declared in the `public` section of the class. A `private` constructor can be used to prevent the creation of objects of a class, which is useful in specific design patterns like the Singleton pattern.
--   **What if you don't mention a constructor?** If you do not define any constructor, the C++ compiler provides a **default constructor** on its own. This default constructor does not accept any parameters and has an empty body.
-
-### Types of Constructors in C++
-
-1.  **Default Constructor**: A constructor that takes no arguments. If you don't define any constructor, the compiler creates one for you.
-2.  **Parameterized Constructor**: A constructor that accepts arguments to initialize the data members.
-3.  **Copy Constructor**: A constructor that creates an object by initializing it with an object of the same class, which has been created previously.
-
 ### Constructor Overloading
 
-Constructor overloading is a concept of having more than one constructor in a class with a different list of parameters. Each constructor performs a different task. C++ allows constructor overloading.
+Constructor overloading is a feature in C++ that allows a class to have more than one constructor, as long as they have different parameter lists (either a different number of parameters or different types of parameters). The compiler determines which constructor to call based on the arguments provided during object creation.
+
+-   For a practical code example, see the `L5_constructor_overloading.cpp` file.
+-   To test your understanding, check out the [Quiz on Constructor Overloading](./quiz_constructors.md).
 
 ## Destructors
 
@@ -399,59 +386,12 @@ int main() {
 
 This example demonstrates how `private` members hide the data, and `public` methods provide controlled access. This prevents direct, uncontrolled modification of the object's state.
 
-### Quiz: Access Modifier Order
+### Using Multiple Access Modifiers
 
-**Question:** What happens if you define a class where you switch between access modifiers multiple times, like in the code below? Will it compile? What will be the output?
+In C++, you can switch between `public`, `private`, and `protected` access modifiers multiple times within a single class definition. The compiler reads the class sequentially, and each modifier applies to all subsequent members until the next modifier is found. While it is common practice to group all `public`, `private`, and `protected` members together, it is not a requirement of the language.
 
-**Code:**
-
-Before you read the explanation, try to compile and run the code in the `L2_multiple_access_modifiers.cpp` file!
-
-```cpp
-#include <iostream>
-#include <string>
-
-class Person {
-private:
-    std::string name;
-
-public:
-    int age;
-
-public: // Is this second 'public' okay?
-    // Constructor
-    Person(std::string n, int a) {
-        name = n;
-        age = a;
-    }
-
-    void printName() {
-        std::cout << "Name: " << name << std::endl;
-    }
-};
-
-int main() {
-    Person person1("Lohit", 21);
-    person1.age = 22; // Accessing public member
-    std::cout << "Age: " << person1.age << std::endl;
-    person1.printName();
-    // person1.name = "P T"; // This would be a compile error
-    return 0;
-}
-
-```
-
-**Explanation:**
-
-Yes, the code will compile and run without any issues. In C++, you can switch between `public`, `private`, and `protected` as many times as you need within a class definition.
-
--   The compiler reads the class definition sequentially.
--   When it sees an access modifier (like `private:`), all subsequent members are given that access level until another modifier is encountered.
--   In the `Person` class, `name` is declared after `private:`, so it is private.
--   Then, `age` is declared after the first `public:`, making it public.
--   The second `public:` is redundant but perfectly legal. It simply reaffirms that the following members (the constructor and the `printName` method) are also public.
-
-This demonstrates that access modifiers apply to sections of the class definition, and you can break them into as many sections as you like.
+-   For a practical code example, see the `L2_multiple_access_modifiers.cpp` file.
+-   To test your understanding, check out the [Quiz on Access Modifier Order](./quiz.md).
 
 ## Default Access Modifier
 
