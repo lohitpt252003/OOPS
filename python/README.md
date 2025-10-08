@@ -268,6 +268,37 @@ print(f"Name (mangled): {teacher1._Teacher__name}")
 
 This example illustrates Python's approach to encapsulation, which relies on programmer discipline and naming conventions rather than strict enforcement by the language.
 
+### Quiz: A Note on Access Modifier Order
+
+**Question:** In C++, you can switch between `public` and `private` sections. What is the equivalent in Python? What happens if you try to group your methods under a `private` block?
+
+**Explanation:**
+
+This concept does not apply to Python. Python does not use keywords or blocks like `public:` or `private:` to define the visibility of members. Instead, access is determined on a **per-member basis** through naming conventions.
+
+-   If a member name starts with no underscore (e.g., `age`), it is public.
+-   If it starts with a single underscore (e.g., `_salary`), it is protected by convention.
+-   If it starts with a double underscore (e.g., `__name`), it is considered private and its name is mangled.
+
+The order in which you define methods or attributes in a Python class has no effect on their visibility. Each member's access level is determined individually by its name.
+
+For example, the following class is perfectly normal in Python:
+
+```python
+class Person:
+    def __init__(self, name, age):
+        self.__name = name  # Private
+        self.age = age      # Public
+
+    def print_name(self):   # Public
+        print(f"Name: {self.__name}")
+
+    def _get_name(self):    # Protected by convention
+        return self.__name
+```
+
+There is no need to group them, as their visibility is independent of their position in the class definition.
+
 ## Default Access Modifier
 
 In Python, all class members (attributes and methods) are **`public`** by default. There are no keywords to declare members as public; they are public unless their names start with underscores.

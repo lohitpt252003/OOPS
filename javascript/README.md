@@ -1,5 +1,8 @@
 # JavaScript OOP Examples
 
+> **New!** Check out the [Quiz on Access Modifier Order](./quiz.md).
+
+
 This folder contains examples and implementations of Object-Oriented Programming (OOP) concepts using JavaScript.
 
 ## What is OOP?
