@@ -48,13 +48,19 @@ Constructor overloading is a concept of having more than one constructor in a cl
 
 ## Destructors
 
-A destructor is a special member function that is called automatically when an object of a class is destroyed. It is the counterpart to the constructor.
+A destructor is a special member function that is automatically called when an object of a class is destroyed. It is the counterpart to the constructor. C++ has both default and custom destructors.
 
 -   **What is it?** A destructor has the same name as the class, preceded by a tilde (`~`), and it does not have a return type or any parameters.
 -   **Purpose:** The primary purpose of a destructor is to release resources that the object may have acquired during its lifetime. This is crucial for preventing resource leaks, such as memory leaks when an object allocates memory dynamically.
 -   **When is it called?** A destructor is called when an object goes out of scope, or when `delete` is called on a pointer to an object.
 
-### C++ Example
+### Default vs. Custom Destructors
+
+1.  **Default Destructor**: If you do not provide a destructor, the C++ compiler will create a **default destructor** for you. This automatically generated destructor is `public` and `inline`, and its main job is to call the destructors for any member objects and base classes. It is sufficient for simple classes that do not manage any dynamic resources.
+
+2.  **Custom Destructor**: You should define a custom destructor whenever your class manages a resource that needs to be explicitly released, such as dynamically allocated memory, open files, or network connections. This gives you control over the cleanup process.
+
+### C++ Example of a Custom Destructor
 
 ```cpp
 #include <iostream>
@@ -65,14 +71,15 @@ public:
         std::cout << "Constructor called" << std::endl;
     }
 
+    // Custom Destructor
     ~MyClass() {
-        std::cout << "Destructor called" << std::endl;
+        std::cout << "Custom Destructor called" << std::endl;
     }
 };
 
 int main() {
     MyClass obj; // Constructor is called here
-    return 0; // Destructor is called here, when obj goes out of scope
+    return 0; // Custom Destructor is called here, when obj goes out of scope
 }
 ```
 
@@ -501,4 +508,5 @@ Constructor overloading is a concept of having more than one constructor in a cl
 - [Parameterized Constructor Example](./L4_parameterized_constructor.cpp)
 - [Copy Constructor Example](./L4_copy_constructor.cpp)
 - [Constructor Overloading Example](./L5_constructor_overloading.cpp)
-- [Destructor Example](./L9_destructor.cpp)
+- [Default Destructor Example](./L9_default_destructor.cpp)
+- [Custom Destructor Example](./L9_custom_destructor.cpp)

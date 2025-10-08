@@ -124,17 +124,19 @@ Common ways to perform a deep copy:
 -   **`JSON.parse(JSON.stringify(object))`**: This is a simple way to deep copy objects that are JSON-safe (i.e., contain no functions, `undefined`, `NaN`, `Infinity`, or circular references).
 -   **External libraries**: For complex objects or objects that are not JSON-safe, libraries like Lodash (`_.cloneDeep()`) are often used.
 
-## Destructors
+## Destructors and Garbage Collection
 
-JavaScript does not have destructors in the same way as C++ or Python. Memory management is handled automatically by the garbage collector.
+JavaScript does not have destructors in the same way as languages like C++ or Python. The concept of manually destroying an object or having a specific function that runs upon destruction does not exist.
 
--   **What is it?** There is no direct equivalent of a destructor in JavaScript.
--   **Purpose:** Cleanup is handled by the garbage collector, which automatically reclaims memory that is no longer reachable.
--   **When is it called?** You cannot predict when the garbage collector will run.
+-   **No Destructor Function**: You cannot define a `destructor()` or `__del__()` method that is guaranteed to run when an object is no longer in use.
+-   **Automatic Garbage Collection**: Memory management is handled automatically by the JavaScript engine's garbage collector (GC). The GC's job is to identify and reclaim memory that is no longer reachable by any part of the program.
+-   **Unpredictable Timing**: You cannot predict *when* the garbage collector will run. It might run frequently or very rarely, depending on memory pressure and the engine's algorithm. Therefore, you should never rely on it for timely cleanup of resources like files or network connections.
 
-For more advanced use cases, the `FinalizationRegistry` object provides a way to request that a cleanup callback be called when an object is garbage-collected. However, its use is complex and not recommended for beginners.
+For advanced and specific use cases, the `FinalizationRegistry` object provides a way to request a cleanup callback when an object is garbage-collected. However, its use is complex, and its behavior is not guaranteed, so it is not recommended for general use.
 
-### JavaScript Example
+### Example of an Object Becoming Eligible for Garbage Collection
+
+The following code shows an object being created and then going out of scope, which makes it eligible for garbage collection. It does not define a destructor, as the concept does not apply to JavaScript.
 
 ```javascript
 class MyClass {
@@ -147,11 +149,10 @@ class MyClass {
 function run() {
     let obj = new MyClass("myObject");
     console.log("Object created");
-}
+} // The 'obj' variable ceases to exist here.
 
 run();
-console.log("Function 'run' has finished. The object is now out of scope and eligible for garbage collection, but there's no guaranteed destructor call.");
-
+console.log("Function 'run' has finished. The object is now out of scope and eligible for garbage collection, but there is no destructor and no guaranteed time of cleanup.");
 ```
 
 ## Why is OOP Necessary?
@@ -4893,4 +4894,4 @@ console.log(student3.course.title); // "Math"
 - [The `this` Keyword Example](./L6_this_keyword.js)
 - [Default Copy Constructor Example](./L7_default_copy_constructor.js)
 - [Custom Copy Constructor Example](./L8_custom_copy_constructor.js)
-- [Destructor Example](./L9_destructor.js)
+- [Garbage Collection Example](./L9_garbage_collection.js)

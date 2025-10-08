@@ -394,13 +394,19 @@ print(student3.course.title)  # "Math"
 
 ## Destructors
 
-In Python, the `__del__` method is the destructor. It is called when an object's reference count becomes zero.
+In Python, the `__del__` method is the destructor. It is called when an object's reference count becomes zero and the object is about to be destroyed by the garbage collector.
 
--   **What is it?** The `__del__` method is a special method that is called when an object is about to be destroyed.
--   **Purpose:** It can be used to perform cleanup tasks, such as closing file handles or database connections.
--   **When is it called?** The `__del__` method is called when the garbage collector decides to destroy the object. This is not always predictable, so it's not recommended to rely on it for critical cleanup operations.
+-   **What is it?** The `__del__` method is a special method that can be defined to perform cleanup tasks before an object is reclaimed.
+-   **Purpose:** It can be used for final cleanup, such as closing file handles or database connections.
+-   **When is it called?** The `__del__` method is called automatically by the garbage collector. However, the exact timing is not guaranteed. It's not recommended to rely on it for critical cleanup operations that must happen at a specific time.
 
-### Python Example
+### Default Behavior vs. Custom Destructor (`__del__`)
+
+1.  **Default Behavior (Garbage Collection)**: If you do not define a `__del__` method, Python does not create a "default destructor" function. Instead, the default behavior is that the garbage collector will automatically reclaim the object's memory when it's no longer referenced. This is sufficient for most classes.
+
+2.  **Custom Destructor (`__del__`)**: You should define a `__del__` method only when you need to perform specific cleanup actions that won't happen automatically, like releasing external resources. Overriding `__del__` can sometimes complicate garbage collection, so it should be used with care.
+
+### Python Example of a Custom Destructor
 
 ```python
 import time
@@ -410,8 +416,9 @@ class MyClass:
         self.name = name
         print(f"{self.name}: Constructor called")
 
+    # Custom Destructor
     def __del__(self):
-        print(f"{self.name}: Destructor called")
+        print(f"{self.name}: Custom Destructor called")
 
 obj1 = MyClass("obj1")
 obj2 = obj1
@@ -433,4 +440,5 @@ print("obj2 deleted")
 - [Constructor Overloading Workaround Example](./L5_constructor_overloading_workaround.py)
 - [Default Copy Constructor Example](./L7_default_copy_constructor.py)
 - [Custom Copy Constructor Example](./L8_custom_copy_constructor.py)
-- [Destructor Example](./L9_destructor.py)
+- [Default Behavior (Garbage Collection)](./L9_default_behavior.py)
+- [Custom Destructor Example](./L9_custom_destructor.py)
